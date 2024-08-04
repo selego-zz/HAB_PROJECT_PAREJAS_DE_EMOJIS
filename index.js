@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 /**
  * Parejas de Emoji
@@ -17,10 +17,14 @@
  * ● El juego debe llevar la cuenta de los intentos realizados.
  * ● El resultado final es el número de intentos realizados. Cuando
  * menor sea esa puntuación (como mínimo puede ser 8) mejor.
- * 
+ *
  * Recursos:
  * https://getemoji.com/
- * 
+ *
  * Procesamiento de cartas
  * https://codepen.io/bertez/pen/oNoryxg
  */
+
+// Volumen de audio por defecto
+const audio = document.querySelector("#theme");
+audio.volume = 0.5;
