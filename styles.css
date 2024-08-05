@@ -1,15 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Nabla&family=Playwrite+CU:wght@100..400&display=swap");
+
 /* CSS RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-h1 {
-  display: center;
-  font-weight: bold;
-  justify-content: center;
-  color: white;
-  text-shadow: 0.5cm;
 }
 
 body {
@@ -19,26 +14,46 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
+  padding: 0.3rem;
+
   background-color: rgb(0, 31, 98);
+  background-image: linear-gradient(135deg, #444cf7 25%, transparent 25%),
+    linear-gradient(225deg, #444cf7 25%, transparent 25%),
+    linear-gradient(45deg, #444cf7 25%, transparent 25%),
+    linear-gradient(315deg, #444cf7 25%, #575ffa 25%);
+  background-position: 28px 0, 28px 0, 0 0, 0 0;
+  background-size: 28px 28px;
+  background-repeat: repeat;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  max-width: 1000px;
+h1 {
+  font-size: 4rem;
+  font-family: "Nabla", system-ui;
+  height: 6rem;
+  margin: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgb(229, 255, 0);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.274);
+}
+
+h2 {
+  text-align: center;
+  padding: 0 0 1rem;
+  color: rgb(200, 255, 0);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.664);
 }
 
 .card {
-  width: 100px;
-  height: 150px;
+  width: 90px;
+  height: 135px;
   perspective: 600px;
-  margin: 1rem;
+  /* margin: 0.5rem; */
 }
 
 .content {
-  position: absolute;
   width: 100%;
   height: 100%;
   transition: transform 1s;
@@ -54,7 +69,9 @@ body {
   display: grid;
   place-content: center;
   font-size: 3rem;
+  border: 3px solid rgb(42, 42, 119);
   border-radius: 1rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.342);
   backface-visibility: hidden;
   user-select: none;
 }
@@ -64,14 +81,37 @@ body {
   transform: rotateY(180deg);
 }
 
-/* .card.paired .content,
- */
 .card.flipped .content {
   transform: rotateY(180deg);
   transition: transform 0.5s;
 }
 
 .table {
+  padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.3rem;
+  max-width: 500px;
+  max-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+/* SCROLL BAR */
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(243, 243, 243, 0.37);
+  border-radius: 10px;
 }
