@@ -68,3 +68,8 @@ body {
   transform: rotateY(180deg);
   transition: transform 0.5s;
 }
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
