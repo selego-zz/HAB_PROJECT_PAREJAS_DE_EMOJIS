@@ -45,8 +45,8 @@ let pairsFound = 0;
 
 const cards = document.querySelectorAll(".card");
 const name = document.querySelectorAll(".name");
-const score = document.querySelectorAll(".score");
-
+const score = document.querySelector(".score");
+console.log(score);
 //const iconList = ["🤩", "🤭", "😂v"]; //@@@
 
 
