@@ -117,15 +117,20 @@
         <label for="name">Your nickname?</label>
         <input type="text" name="name" class="name" />
 
-        <h2 class="score"></h2>
+        <p class="score"></p>
 
         <footer>
           <!-- Botón para tal vez sustituir el reproductor por defecto -->
           <!-- <div id="audio-icon-container">
         <button id="play-icon">Toggle background audio</button>
       </div> -->
-
-          <audio id="theme" src="sfx/memoji.ogg" controls loop></audio>
+          <div class="audio-container">
+            <audio id="theme" src="sfx/memoji.ogg" controls loop hidden>
+              Your browser does not support audio.
+            </audio>
+            <button id="play-button">Play audio.</button>
+            <button id="pause-button">Mute audio.</button>
+          </div>
         </footer>
       </aside>
     </main>
