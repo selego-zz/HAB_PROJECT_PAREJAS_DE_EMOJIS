@@ -25,10 +25,7 @@
  * https://codepen.io/bertez/pen/oNoryxg
  */
 
-
-// Volumen de audio por defecto
-const audio = document.querySelector("#theme");
-audio.volume = 0.5;
+// CÓDIGO FUNCIONAL
 
 const totalPairs = 8;
 const iconList = [];
@@ -42,13 +39,11 @@ let indexCurrentCard = -1;
 let attemptsTried = 0;
 let pairsFound = 0;
 
-
 const cards = document.querySelectorAll(".card");
 const name = document.querySelectorAll(".name");
 const score = document.querySelectorAll(".score");
 
 //const iconList = ["🤩", "🤭", "😂v"]; //@@@
-
 
 /** @@@ borrar tras meter los iconos a mano */
 for (let i = 0; i < totalPairs; i++) {
@@ -60,9 +55,7 @@ let finalIconList = [];
 finalIconList = iconList.concat(iconList).sort(() => Math.random() - 0.5);
 console.log(finalIconList);
 const backs = document.querySelectorAll(".back");
-backs.forEach((back, index) => back.textContent = finalIconList[index]
-
-);
+backs.forEach((back, index) => (back.textContent = finalIconList[index]));
 
 /**volteo de cartas */
 //al pulsar una carta
@@ -75,35 +68,44 @@ const reveal = (e) => {
   cardsFlipped[cardsFlipped.length - 1].classList.add("flipped");
 
   //tomamos la imaguen de la carta para comparar
-  currentCardBack[++indexCurrentCard] = cardsFlipped[cardsFlipped.length - 1].querySelector(".back");
+  currentCardBack[++indexCurrentCard] =
+    cardsFlipped[cardsFlipped.length - 1].querySelector(".back");
 
   //si no habíamos dado la vuelta a ninguna carta
   if (currentCardIcon.length < 1) {
     //guardamos el valor de la carta parra comparar luego
     currentCardIcon = currentCardBack[indexCurrentCard].textContent;
-    console.log("No había cartas: damos la vuelta a la primera " + currentCardIcon);
-  }
-  else {//su ta habíamos dado la vuelta a cartas
-    attemptsTried++;//sube el contador de intentos
-    console.log(`Pareja de cartas ${currentCardIcon} Vs ${currentCardBack[indexCurrentCard].textContent}`);
+    console.log(
+      "No había cartas: damos la vuelta a la primera " + currentCardIcon
+    );
+  } else {
+    //su ta habíamos dado la vuelta a cartas
+    attemptsTried++; //sube el contador de intentos
+    console.log(
+      `Pareja de cartas ${currentCardIcon} Vs ${currentCardBack[indexCurrentCard].textContent}`
+    );
 
     //comparamos para ver si fue exitoso o no
     if (currentCardIcon === currentCardBack[indexCurrentCard].textContent) {
       //si encontramos la pareja
-      cardsFlipped = [];//vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
+      cardsFlipped = []; //vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
       pairsFound++;
       if (pairsFound === totalPairs) {
         setTimeout(() => {
-          alert("You Win")
+          alert("You Win");
         }, 500);
-
       }
-    } else { // si no fue exitoso
+    } else {
+      // si no fue exitoso
       flipCards();
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${name.textContent}, your score is ${attemptsTried} in ${parseInt((Date.now() - tInit) / 1000)} sec`;
+    score.textContent = `Hi ${
+      name.textContent
+    }, your score is ${attemptsTried} in ${parseInt(
+      (Date.now() - tInit) / 1000
+    )} sec`;
   }
 };
 
@@ -113,11 +115,26 @@ for (const card of cards) {
 
 function flipCards() {
   setTimeout(() => {
-    cardsFlipped.forEach(
-      currentCard => {
-        currentCard.classList.remove("flipped")
-        cardsFlipped = [];
-      }
-    );
+    cardsFlipped.forEach((currentCard) => {
+      currentCard.classList.remove("flipped");
+      cardsFlipped = [];
+    });
   }, 1000);
 }
+
+////////////////////
+
+// AUDIO
+
+// Volumen de audio de fondo por defecto
+const audio = document.querySelector("#theme");
+audio.volume = 0.5;
+
+// Voltear las cartas
+const cardFront = document.querySelectorAll(".card");
+
+function flipCard_sfx() {
+  const sound = new Audio("sfx/flip-card.ogg");
+  sound.play();
+}
+addEventListener("click", flipCard_sfx);
