@@ -31,8 +31,8 @@ body {
 }
 
 .card {
-  width: 200px;
-  height: 300px;
+  width: 100px;
+  height: 150px;
   perspective: 600px;
   margin: 1rem;
 }
@@ -53,7 +53,7 @@ body {
   background: linear-gradient(rgb(44, 173, 238), rgb(38, 242, 249));
   display: grid;
   place-content: center;
-  font-size: 8rem;
+  font-size: 3rem;
   border-radius: 1rem;
   backface-visibility: hidden;
   user-select: none;
@@ -64,6 +64,8 @@ body {
   transform: rotateY(180deg);
 }
 
+/* .card.paired .content,
+ */
 .card.flipped .content {
   transform: rotateY(180deg);
   transition: transform 0.5s;
