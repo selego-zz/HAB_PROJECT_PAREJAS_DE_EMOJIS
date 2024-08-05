@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Memoji | Find the emoji pairs!</title>
-  </head>
 
-  <body>
-    <header>
-      <h1>Memoji</h1>
-      <h2>Find the emoji pairs!</h2>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Memoji | Find the emoji pairs!</title>
+</head>
 
-    <main>
+<body>
+  <header>
+    <h1>Memoji</h1>
+    <h2>Find the emoji pairs!</h2>
+  </header>
+
+  <main>
+    <section class="table">
       <section class="card">
         <div class="content">
           <div class="front">🌊</div>
@@ -62,17 +64,19 @@
           <div class="back">🐡</div>
         </div>
       </section>
-    </main>
+    </section>
+  </main>
 
-    <footer>
-      <!-- Botón para tal vez sustituir el reproductor por defecto -->
-      <!-- <div id="audio-icon-container">
+  <footer>
+    <!-- Botón para tal vez sustituir el reproductor por defecto -->
+    <!-- <div id="audio-icon-container">
         <button id="play-icon">Toggle background audio</button>
       </div> -->
 
-      <audio id="theme" src="sfx/memoji.ogg" controls loop></audio>
-    </footer>
+    <audio id="theme" src="sfx/memoji.ogg" controls loop></audio>
+  </footer>
 
-    <script type="module" src="index.js"></script>
-  </body>
+  <script type="module" src="index.js"></script>
+</body>
+
 </html>
