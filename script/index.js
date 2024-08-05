@@ -25,6 +25,7 @@
  * https://codepen.io/bertez/pen/oNoryxg
  */
 
+
 // Volumen de audio por defecto
 const audio = document.querySelector("#theme");
 audio.volume = 0.5;
@@ -34,7 +35,6 @@ const iconList = [];
 
 let currentCardIcon = "";
 let tInit = Date.now();
-let timeOutCard;
 let cardsFlipped = [];
 
 let currentCardBack = [];
@@ -49,9 +49,6 @@ const score = document.querySelectorAll(".score");
 
 //const iconList = ["🤩", "🤭", "😂v"]; //@@@
 
-/*
-const iconList = ["./img/cardBacks/img1.gif","./img/cardBacks/img2.gif"]
-*/
 
 /** @@@ borrar tras meter los iconos a mano */
 for (let i = 0; i < totalPairs; i++) {
@@ -70,9 +67,11 @@ backs.forEach((back, index) => back.textContent = finalIconList[index]
 /**volteo de cartas */
 //al pulsar una carta
 const reveal = (e) => {
-  if (cardsFlipped.length == 2) { return; }
+  if (cardsFlipped.length == 2) return;
+  if (e.currentTarget.classList.contains("flipped")) return;
   //guardamos la carta en la matriz de cartas dadas la vuelta
   cardsFlipped[cardsFlipped.length] = e.currentTarget;
+
   cardsFlipped[cardsFlipped.length - 1].classList.add("flipped");
 
   //tomamos la imaguen de la carta para comparar
