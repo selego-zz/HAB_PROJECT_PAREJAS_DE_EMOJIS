@@ -62,6 +62,7 @@ backs.forEach((back, index) => (back.textContent = finalIconList[index]));
 const reveal = (e) => {
   if (cardsFlipped.length == 2) return;
   if (e.currentTarget.classList.contains("flipped")) return;
+  flipCard_sfx();
   //guardamos la carta en la matriz de cartas dadas la vuelta
   cardsFlipped[cardsFlipped.length] = e.currentTarget;
 
@@ -101,11 +102,10 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${
-      name.textContent
-    }, your score is ${attemptsTried} in ${parseInt(
-      (Date.now() - tInit) / 1000
-    )} sec`;
+    score.textContent = `Hi ${name.textContent
+      }, your score is ${attemptsTried} in ${parseInt(
+        (Date.now() - tInit) / 1000
+      )} sec`;
   }
 };
 
@@ -137,4 +137,4 @@ function flipCard_sfx() {
   const sound = new Audio("sfx/flip-card.ogg");
   sound.play();
 }
-addEventListener("click", flipCard_sfx);
+//addEventListener("click", flipCard_sfx);
