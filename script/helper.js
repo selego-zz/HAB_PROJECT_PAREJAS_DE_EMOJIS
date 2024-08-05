@@ -6,13 +6,15 @@ function getFormattedTime(miliseconds) {
   // milisegundos
   time = (+miliseconds % 1000)
   // segundos
-  if ((auxTime = miliseconds / 1000) === 0) return time;
+  if ((auxTime = parseInt(miliseconds / 1000)) === 0) return time;
   time = (auxTime % 60) + "." + time;
+  if (auxTime % 60 < 10) time = "0" + time;
   //minutos
-  if ((auxTime = auxTime / 60) === 0) return time;
+  if ((auxTime = parseInt(auxTime / 60)) === 0) return time;
   time = (auxTime % 60) + ":" + time;
+  if (auxTime % 60 < 10) time = "0" + time;
   //horas
-  if ((auxTime = auxTime / 60) === 0) return time;
+  if ((auxTime = parseInt(auxTime / 60)) === 0) return time;
   time = auxTime + ":" + time;
   return time;
 }
