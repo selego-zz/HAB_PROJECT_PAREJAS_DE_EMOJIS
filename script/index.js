@@ -89,6 +89,7 @@ const reveal = (e) => {
     //comparamos para ver si fue exitoso o no
     if (currentCardIcon === currentCardBack[indexCurrentCard].textContent) {
       //si encontramos la pareja
+      setTimeout(() => pairFound_sfx(), 600);
       cardsFlipped = []; //vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
       pairsFound++;
       if (pairsFound === totalPairs) {
@@ -99,13 +100,15 @@ const reveal = (e) => {
     } else {
       // si no fue exitoso
       flipCards();
+      setTimeout(() => miss_sfx(), 700);
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${name.textContent
-      }, your score is ${attemptsTried} in ${parseInt(
-        (Date.now() - tInit) / 1000
-      )} sec`;
+    score.textContent = `Hi ${
+      name.textContent
+    }, your score is ${attemptsTried} in ${parseInt(
+      (Date.now() - tInit) / 1000
+    )} sec`;
   }
 };
 
@@ -127,14 +130,42 @@ function flipCards() {
 // AUDIO
 
 // Volumen de audio de fondo por defecto
-const audio = document.querySelector("#theme");
-audio.volume = 0.5;
+const audioBackground = document.querySelector("#theme");
+audioBackground.volume = 0.5;
 
-// Voltear las cartas
-const cardFront = document.querySelectorAll(".card");
+// Efectos de sonido
 
 function flipCard_sfx() {
   const sound = new Audio("sfx/flip-card.ogg");
+  sound.volume = 0.5;
   sound.play();
 }
-//addEventListener("click", flipCard_sfx);
+
+function pairFound_sfx() {
+  const sound = new Audio("sfx/correct.ogg");
+  sound.volume = 0.2;
+  sound.play();
+}
+
+function miss_sfx() {
+  const sound = new Audio("sfx/miss.ogg");
+  sound.volume = 0.5;
+  sound.play();
+}
+
+// Iconos de audio
+
+const audio = document.querySelector("audio");
+
+const playButton = document.getElementById("play-button");
+const pauseButton = document.getElementById("pause-button");
+
+playButton.addEventListener("click", () => {
+  audioBackground.play();
+});
+
+pauseButton.addEventListener("click", () => {
+  audioBackground.pause();
+});
+
+console.log(playButton);

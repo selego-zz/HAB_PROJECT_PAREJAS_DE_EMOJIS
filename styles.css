@@ -28,6 +28,14 @@ body {
   background-repeat: repeat;
 }
 
+main {
+  width: min-content;
+}
+
+aside {
+  width: max-content;
+}
+
 h1 {
   font-size: 4rem;
   font-family: "Nabla", system-ui;
@@ -87,7 +95,7 @@ h2 {
 }
 
 .table {
-  padding: 2rem;
+  padding: 2rem 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 0.3rem;
@@ -114,4 +122,37 @@ h2 {
 ::-webkit-scrollbar-thumb {
   background: rgba(243, 243, 243, 0.37);
   border-radius: 10px;
+}
+
+/* AUDIO */
+
+.audio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  width: 90px;
+  height: 40px;
+  margin: 20px;
+  background-color: rgba(173, 216, 230, 0.836);
+  border-radius: 10px;
+}
+
+#play-button,
+#pause-button {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  font-size: 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#play-button {
+  background-image: url(img/icons/volume-max-svgrepo-com.svg);
+}
+
+#pause-button {
+  background-image: url(img/icons/volume-xmark-svgrepo-com.svg);
 }
