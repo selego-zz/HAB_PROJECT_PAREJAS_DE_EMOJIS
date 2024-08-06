@@ -27,13 +27,6 @@ menor sea esa puntuación (como mínimo puede ser 8) mejor.
 
 IDEAS:
 0- estetica
-1- Poder escoger temática
-2- modo noche modo días
 3- poder escoger "dificultad" nº de cartas
-3.5- modo campaña
-4- poder escoger Hardmode (tiempo limitado)
-5- tabla de puntuaciones, que se guarde en el navegador, y se carge, con las 10 mejores puntuaciones
-5.5- General o por dificultados
-6- Efectos de sonido
 7- cambiar el you win final
 8- poder comparar imagenes en lugar de iconos

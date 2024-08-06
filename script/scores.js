@@ -4,52 +4,52 @@ import { getFormattedTime } from "./helper.js"
 const defaultScoreTableCard = [
   {
     name: "The Boss",
-    score: 100,
+    score: 15,
     time: 997 * 59 * 21,//en milisegundos
   },
   {
     name: "Maki",
-    score: 200,
+    score: 20,
     time: 1010 * 60 * 40,//en milisegundos
   },
   {
     name: "Cerecita",
-    score: 400,
+    score: 40,
     time: 1001 * 60 * 58,//en milisegundos
   },
   {
     name: "undefined",
-    score: 800,
+    score: 60,
     time: 999 * 60 * 60,//en milisegundos
   },
   {
     name: "Abuelito",
-    score: 1600,
+    score: 70,
     time: 1000 * 50 * 37,//en milisegundos
   },
   {
     name: "tu",
-    score: 3200,
+    score: 80,
     time: 1000 * 61 * 65,//en milisegundos
   },
   {
     name: "yo",
-    score: 6400,
+    score: 90,
     time: 1000 * 60 * 15,//en milisegundos
   },
   {
     name: "Mejor que el Mejor",
-    score: 12800,
+    score: 100,
     time: 1000 * 62 * 30,//en milisegundos
   },
   {
     name: "Pareando",
-    score: 25600,
+    score: 200,
     time: 1000 * 60 * 60 * 1,//en milisegundos
   },
   {
     name: "El Mejor",
-    score: 1000000,
+    score: 10000,
     time: 1000 * 60 * 60 * 20,//en milisegundos
   },
 ]
