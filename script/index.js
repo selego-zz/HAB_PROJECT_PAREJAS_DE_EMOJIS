@@ -28,6 +28,7 @@
 //importaciones para el código
 import { getFormattedTime } from "./helper.js";
 import { Scores } from "./scores.js";
+import { animals, mountain, sea, spring, universe } from "./icons.js";
 
 //variables que se usarán
 const totalPairs = 8;
@@ -37,42 +38,36 @@ let tInit = Date.now();
 let attemptsTried = 0;
 
 //sobre los iconos
-const iconList = [];
+let iconList = [];
 let currentCardIcon = "";
 let finalIconList = [];
 
-//sobre las cartas, 
+//sobre las cartas,
 let cardsFlipped = [];
 let currentCardBack = [];
 let indexCurrentCard = -1;
 let pairsFound = 0;
 
-
 //tomamos los selectores para modificar el html
 ////de las cartas
 const cards = document.querySelectorAll(".card");
+const fronts = document.querySelectorAll(".front");
 const backs = document.querySelectorAll(".back");
-
 ////para la puntuación
 const name = document.querySelector(".name");
 const score = document.querySelector(".score");
 const scoreSection = document.querySelector(".scoreTable");
 
-
 /*******************************************\
  **********establecemos los iconos**********
 \*******************************************/
-
-//iconList = ["🤩", "🤭", "😂v"]; //@@@
-/** @@@ borrar tras meter los iconos a mano */
-for (let i = 0; i < totalPairs; i++) {
-  iconList.push(i);
-}
-/** @@@ borrar tras meter los iconos a mano */
+iconList = sea.back;
 
 finalIconList = iconList.concat(iconList).sort(() => Math.random() - 0.5);
 
 backs.forEach((back, index) => (back.textContent = finalIconList[index]));
+fronts.forEach((front, index) => (front.textContent = sea.front));
+
 /*******************************************\
  **********establecemos los iconos**********
 \*******************************************/
@@ -86,7 +81,6 @@ const scoreTable = new Scores(scoreSection, totalPairs * 2);
 /*******************************************\
  ***establecemos la tabla de puntuaciones***
 \*******************************************/
-
 
 /*******************************************\
  *************volteo de cartas *************
@@ -126,7 +120,7 @@ const reveal = (e) => {
       cardsFlipped = []; //vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
       pairsFound++;
       if (pairsFound === totalPairs) {
-        scoreTable.add(name.value, attemptsTried, Date.now() - tInit)
+        scoreTable.add(name.value, attemptsTried, Date.now() - tInit);
         setTimeout(() => {
           alert("You Win");
         }, 500);
@@ -138,8 +132,11 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${name.value
-      }, your score is ${attemptsTried} in ${getFormattedTime(Date.now() - tInit)}`;
+    score.textContent = `Hi ${
+      name.value
+    }, your score is ${attemptsTried} in ${getFormattedTime(
+      Date.now() - tInit
+    )}`;
   }
 };
 
