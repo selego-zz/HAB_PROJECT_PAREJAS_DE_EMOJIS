@@ -59,7 +59,7 @@ const backs = document.querySelectorAll(".back");
 const name = document.querySelector(".name");
 const score = document.querySelector(".score");
 const scoreSection = document.querySelector(".scoreTable");
-const initButton = document.querySelector("h2");
+const initButton = document.querySelector("#reset");
 const selectTheme = document.querySelector("select");
 
 reset();
@@ -111,14 +111,11 @@ function reset() {
   backs.forEach((back, index) => {
     back.textContent = finalIconList[index];
     back.style.cssText = icon.backColor;
-  }
-  );
+  });
   fronts.forEach((front) => {
     front.textContent = icon.front;
-    front.style.cssText = icon.frontColor
-
+    front.style.cssText = icon.frontColor;
   });
-
 }
 /*******************************************\
  **********establecemos los iconos**********
@@ -189,18 +186,18 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${name.value
-      }, your score is ${attemptsTried} in ${getFormattedTime(
-        Date.now() - tInit
-      )}`;
+    score.textContent = `Hi ${
+      name.value
+    }, your score is ${attemptsTried} in ${getFormattedTime(
+      Date.now() - tInit
+    )}`;
   }
 };
 
 function flipAllCards() {
   for (const card of cards) {
-    card.classList.remove("flipped")
+    card.classList.remove("flipped");
   }
-
 }
 // tras un click - Revelamos
 for (const card of cards) {
