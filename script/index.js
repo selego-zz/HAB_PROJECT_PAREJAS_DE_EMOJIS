@@ -41,6 +41,8 @@ let attemptsTried = 0;
 let iconList = [];
 let currentCardIcon = "";
 let finalIconList = [];
+let frontIcon;
+let icon;
 
 //sobre las cartas,
 let cardsFlipped = [];
@@ -57,43 +59,72 @@ const backs = document.querySelectorAll(".back");
 const name = document.querySelector(".name");
 const score = document.querySelector(".score");
 const scoreSection = document.querySelector(".scoreTable");
+const initButton = document.querySelector("h2");
+const selectTheme = document.querySelector("select");
+
+reset();
 
 /*******************************************\
- **********establecemos los iconos**********
+ **************Inicio de juego**************
 \*******************************************/
-let frontIcon;
-const selectTheme = document.querySelector("select");
-selectTheme.addEventListener("change", function (e) {
+initButton.addEventListener("click", () => {
+
+  reset();
+});
+
+function reset() {
+  //sobre el tiempo y la puntuación
+  tInit = Date.now();
+  attemptsTried = 0;
+
+  //sobre los iconos
+  let currentCardIcon = "";
+  let finalIconList = [];
+
+  //sobre las cartas,
+  let cardsFlipped = [];
+  let currentCardBack = [];
+  let indexCurrentCard = -1;
+  let pairsFound = 0;
+
   switch (selectTheme.value) {
     case "mountain":
-      iconList = mountain.back;
-      frontIcon = mountain.front;
+      icon = mountain;
       break;
     case "spring":
-      iconList = spring.back;
-      frontIcon = spring.front;
+      icon = spring;
       break;
     case "universe":
-      iconList = universe.back;
-      frontIcon = universe.front;
+      icon = universe;
       break;
     case "animals":
-      iconList = animals.back;
-      frontIcon = animals.front;
+      icon = animals;
       break;
     default:
     case "sea":
-      iconList = sea.back;
-      frontIcon = sea.front;
+      icon = sea;
       break;
   }
-});
+  flipAllCards();
 
-finalIconList = iconList.concat(iconList).sort(() => Math.random() - 0.5);
+  finalIconList = icon.back.concat(icon.back).sort(() => Math.random() - 0.5);
 
-backs.forEach((back, index) => (back.textContent = finalIconList[index]));
-fronts.forEach((front, index) => (front.textContent = frontIcon));
+  backs.forEach((back, index) => {
+    back.textContent = finalIconList[index];
+    back.style.cssText = icon.backColor;
+  }
+  );
+  fronts.forEach((front) => {
+    front.textContent = icon.front;
+    front.style.cssText = icon.frontColor
 
+  });
+
+}
+/*******************************************\
+ **********establecemos los iconos**********
+\*******************************************/
+selectTheme.addEventListener("change", () => reset());
 /*******************************************\
  **********establecemos los iconos**********
 \*******************************************/
@@ -146,6 +177,7 @@ const reveal = (e) => {
       cardsFlipped = []; //vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
       pairsFound++;
       if (pairsFound === totalPairs) {
+        allClear_sfx();
         scoreTable.add(name.value, attemptsTried, Date.now() - tInit);
         setTimeout(() => {
           alert("You Win");
@@ -158,14 +190,19 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${
-      name.value
-    }, your score is ${attemptsTried} in ${getFormattedTime(
-      Date.now() - tInit
-    )}`;
+    score.textContent = `Hi ${name.value
+      }, your score is ${attemptsTried} in ${getFormattedTime(
+        Date.now() - tInit
+      )}`;
   }
 };
 
+function flipAllCards() {
+  for (const card of cards) {
+    card.classList.remove("flipped")
+  }
+
+}
 // tras un click - Revelamos
 for (const card of cards) {
   card.addEventListener("click", reveal);
@@ -207,6 +244,13 @@ function pairFound_sfx() {
 function miss_sfx() {
   const sound = new Audio("sfx/miss.ogg");
   sound.volume = 0.5;
+  sound.play();
+}
+
+function allClear_sfx() {
+  const sound = new Audio("sfx/allclear.ogg");
+  sound.volume = 0.5;
+  audioBackground.pause();
   sound.play();
 }
 

@@ -51,9 +51,15 @@ h1 {
 
 h2 {
   text-align: center;
-  padding: 0 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 0.5rem;
   color: rgb(200, 255, 0);
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.664);
+  border: 1px solid black;
+  box-shadow: 2px 2px 4px;
 }
 
 .card {
@@ -75,7 +81,7 @@ h2 {
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgb(44, 173, 238), rgb(38, 242, 249));
+  background: linear-gradient(rgb(15, 15, 15), rgb(83, 236, 83));
   display: grid;
   place-content: center;
   font-size: 3rem;
