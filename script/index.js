@@ -25,39 +25,72 @@
  * https://codepen.io/bertez/pen/oNoryxg
  */
 
-// CÓDIGO FUNCIONAL
+//importaciones para el código
+import { getFormattedTime } from "./helper.js";
+import { Scores } from "./scores.js";
 
+//variables que se usarán
 const totalPairs = 8;
-const iconList = [];
 
-let currentCardIcon = "";
+//sobre el tiempo y la puntuación
 let tInit = Date.now();
-let cardsFlipped = [];
+let attemptsTried = 0;
 
+//sobre los iconos
+const iconList = [];
+let currentCardIcon = "";
+let finalIconList = [];
+
+//sobre las cartas, 
+let cardsFlipped = [];
 let currentCardBack = [];
 let indexCurrentCard = -1;
-let attemptsTried = 0;
 let pairsFound = 0;
 
-const cards = document.querySelectorAll(".card");
-const name = document.querySelectorAll(".name");
-const score = document.querySelector(".score");
-console.log(score);
-//const iconList = ["🤩", "🤭", "😂v"]; //@@@
 
+//tomamos los selectores para modificar el html
+////de las cartas
+const cards = document.querySelectorAll(".card");
+const backs = document.querySelectorAll(".back");
+
+////para la puntuación
+const name = document.querySelector(".name");
+const score = document.querySelector(".score");
+const scoreSection = document.querySelector(".scoreTable");
+
+
+/*******************************************\
+ **********establecemos los iconos**********
+\*******************************************/
+
+//iconList = ["🤩", "🤭", "😂v"]; //@@@
 /** @@@ borrar tras meter los iconos a mano */
 for (let i = 0; i < totalPairs; i++) {
   iconList.push(i);
 }
 /** @@@ borrar tras meter los iconos a mano */
 
-let finalIconList = [];
 finalIconList = iconList.concat(iconList).sort(() => Math.random() - 0.5);
-console.log(finalIconList);
-const backs = document.querySelectorAll(".back");
-backs.forEach((back, index) => (back.textContent = finalIconList[index]));
 
-/**volteo de cartas */
+backs.forEach((back, index) => (back.textContent = finalIconList[index]));
+/*******************************************\
+ **********establecemos los iconos**********
+\*******************************************/
+
+/*******************************************\
+ ***establecemos la tabla de puntuaciones***
+\*******************************************/
+//console.log(scoreSection);
+const scoreTable = new Scores(scoreSection, totalPairs * 2);
+
+/*******************************************\
+ ***establecemos la tabla de puntuaciones***
+\*******************************************/
+
+
+/*******************************************\
+ *************volteo de cartas *************
+\*******************************************/
 //al pulsar una carta
 const reveal = (e) => {
   if (cardsFlipped.length == 2) return;
@@ -93,6 +126,7 @@ const reveal = (e) => {
       cardsFlipped = []; //vaciamos el array de intentos, para que no se tenga en ccuenta en futuros flipCards
       pairsFound++;
       if (pairsFound === totalPairs) {
+        scoreTable.add(name.value, attemptsTried, Date.now() - tInit)
         setTimeout(() => {
           alert("You Win");
         }, 500);
@@ -104,18 +138,17 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${
-      name.textContent
-    }, your score is ${attemptsTried} in ${parseInt(
-      (Date.now() - tInit) / 1000
-    )} sec`;
+    score.textContent = `Hi ${name.value
+      }, your score is ${attemptsTried} in ${getFormattedTime(Date.now() - tInit)}`;
   }
 };
 
+// tras un click - Revelamos
 for (const card of cards) {
   card.addEventListener("click", reveal);
 }
 
+// si no son pareja, tras 1 segundo - ocultamos
 function flipCards() {
   setTimeout(() => {
     cardsFlipped.forEach((currentCard) => {
@@ -124,8 +157,9 @@ function flipCards() {
     });
   }, 1000);
 }
-
-////////////////////
+/*******************************************\
+ *************volteo de cartas *************
+\*******************************************/
 
 // AUDIO
 
