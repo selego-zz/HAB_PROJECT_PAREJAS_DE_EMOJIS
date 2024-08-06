@@ -30,6 +30,8 @@ body {
 
 main {
   width: min-content;
+  display: flex;
+  flex-direction: column;
 }
 
 aside {
@@ -97,9 +99,9 @@ h2 {
 .table {
   padding: 2rem 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(4, minmax(100px, 1fr));
   gap: 0.3rem;
-  max-width: 500px;
+  width: auto;
   max-height: 100vh;
   justify-content: center;
   align-items: center;
