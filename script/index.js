@@ -68,7 +68,6 @@ reset();
  **************Inicio de juego**************
 \*******************************************/
 initButton.addEventListener("click", () => {
-
   reset();
 });
 
@@ -78,14 +77,14 @@ function reset() {
   attemptsTried = 0;
 
   //sobre los iconos
-  let currentCardIcon = "";
-  let finalIconList = [];
+  currentCardIcon = "";
+  finalIconList = [];
 
   //sobre las cartas,
-  let cardsFlipped = [];
-  let currentCardBack = [];
-  let indexCurrentCard = -1;
-  let pairsFound = 0;
+  cardsFlipped = [];
+  currentCardBack = [];
+  indexCurrentCard = -1;
+  pairsFound = 0;
 
   switch (selectTheme.value) {
     case "mountain":

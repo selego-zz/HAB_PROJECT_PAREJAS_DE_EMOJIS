@@ -81,7 +81,7 @@ h2 {
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgb(15, 15, 15), rgb(83, 236, 83));
+  background: linear-gradient(rgb(44, 173, 238), rgb(38, 242, 249));
   display: grid;
   place-content: center;
   font-size: 3rem;
