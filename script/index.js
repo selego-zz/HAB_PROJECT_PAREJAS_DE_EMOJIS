@@ -61,12 +61,38 @@ const scoreSection = document.querySelector(".scoreTable");
 /*******************************************\
  **********establecemos los iconos**********
 \*******************************************/
-iconList = sea.back;
+let frontIcon;
+const selectTheme = document.querySelector("select");
+selectTheme.addEventListener("change", function (e) {
+  switch (selectTheme.value) {
+    case "mountain":
+      iconList = mountain.back;
+      frontIcon = mountain.front;
+      break;
+    case "spring":
+      iconList = spring.back;
+      frontIcon = spring.front;
+      break;
+    case "universe":
+      iconList = universe.back;
+      frontIcon = universe.front;
+      break;
+    case "animals":
+      iconList = animals.back;
+      frontIcon = animals.front;
+      break;
+    default:
+    case "sea":
+      iconList = sea.back;
+      frontIcon = sea.front;
+      break;
+  }
+});
 
 finalIconList = iconList.concat(iconList).sort(() => Math.random() - 0.5);
 
 backs.forEach((back, index) => (back.textContent = finalIconList[index]));
-fronts.forEach((front, index) => (front.textContent = sea.front));
+fronts.forEach((front, index) => (front.textContent = frontIcon));
 
 /*******************************************\
  **********establecemos los iconos**********
