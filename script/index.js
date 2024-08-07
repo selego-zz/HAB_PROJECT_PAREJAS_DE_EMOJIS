@@ -28,20 +28,19 @@
 //importaciones para el código
 import { getFormattedTime } from "./helper.js";
 import { Scores } from "./scores.js";
+import { insertCard } from "./cards.js";
 import { animals, mountain, sea, spring, universe } from "./icons.js";
 
 //variables que se usarán
-const totalPairs = 8;
+let totalPairs = 8;
 
 //sobre el tiempo y la puntuación
 let tInit = Date.now();
 let attemptsTried = 0;
 
 //sobre los iconos
-let iconList = [];
 let currentCardIcon = "";
 let finalIconList = [];
-let frontIcon;
 let icon;
 
 //sobre las cartas,
@@ -51,17 +50,20 @@ let indexCurrentCard = -1;
 let pairsFound = 0;
 
 //tomamos los selectores para modificar el html
-////de las cartas
-const cards = document.querySelectorAll(".card");
-const fronts = document.querySelectorAll(".front");
-const backs = document.querySelectorAll(".back");
+////de las cartas // al cambiar el layout habrá que retomarlos, así que será diferente
+const table = document.querySelector(".table");
+let cards = document.querySelectorAll(".card");
+let fronts = document.querySelectorAll(".front");
+let backs = document.querySelectorAll(".back");
 ////para la puntuación
 const name = document.querySelector(".name");
 const score = document.querySelector(".score");
 const scoreSection = document.querySelector(".scoreTable");
 const initButton = document.querySelector("#reset");
-const selectTheme = document.querySelector("select");
+const selectTheme = document.querySelector("#themes");
+const selectLayout = document.querySelector("#layout");
 
+selectLayout.value = "4x4";
 reset();
 
 /*******************************************\
@@ -71,7 +73,7 @@ initButton.addEventListener("click", () => {
   reset();
 });
 
-function reset() {
+function reset(resetTimeout = 500) {
   //sobre el tiempo y la puntuación
   tInit = Date.now();
   attemptsTried = 0;
@@ -85,6 +87,9 @@ function reset() {
   currentCardBack = [];
   indexCurrentCard = -1;
   pairsFound = 0;
+
+  if (name.value.length < 1) name.value = "Anonymous"
+  score.textContent = "";
 
   switch (selectTheme.value) {
     case "mountain":
@@ -105,10 +110,12 @@ function reset() {
       break;
   }
   flipAllCards();
-  icon.back.sort(() => Math.random() - 0.5);
+
+  //  icon.back.sort(() => Math.random() - 0.5);
   icon.back = icon.back.slice(0, totalPairs);
 
   finalIconList = icon.back.concat(icon.back).sort(() => Math.random() - 0.5);
+
 
   setTimeout(() => {
     backs.forEach((back, index) => {
@@ -119,8 +126,44 @@ function reset() {
       front.textContent = icon.front;
       front.style.cssText = icon.frontColor;
     });
-  }, 500);
+  }, resetTimeout);
 }
+
+/*******************************************\
+ *************cambiamos layout**************
+\*******************************************/
+selectLayout.addEventListener("change", () => changeLayout());
+
+function changeLayout() {
+  const hCards = selectLayout.value[0];
+  const vCards = selectLayout.value[2];
+
+  cards.forEach(card => card.remove());
+  totalPairs = hCards * vCards / 2;
+  scoreTable = new Scores(scoreSection, totalPairs * 2);
+  table.style.cssText = `grid-template-columns: repeat(${hCards}, minmax(100px, 1fr));`
+
+  for (let i = 0; i < totalPairs; i++) {
+    insertCard(table);
+    insertCard(table);//2, por que son una pareja
+  }
+
+  cards = document.querySelectorAll(".card");//variable, por que pueden cambiar al cambiar la mesa
+  fronts = document.querySelectorAll(".front");
+  backs = document.querySelectorAll(".back");
+  // tras un click - Revelamos
+  for (const card of cards) {
+    card.addEventListener("click", reveal);
+  }
+
+  reset(0);
+
+}
+/*******************************************\
+ *************cambiamos layout**************
+\*******************************************/
+
+
 /*******************************************\
  **********establecemos los iconos**********
 \*******************************************/
@@ -132,8 +175,8 @@ selectTheme.addEventListener("change", () => reset());
 /*******************************************\
  ***establecemos la tabla de puntuaciones***
 \*******************************************/
-//console.log(scoreSection);
-const scoreTable = new Scores(scoreSection, totalPairs * 2);
+//ojo: la cambiamos al cambiar el layout
+let scoreTable = new Scores(scoreSection, totalPairs * 2);
 
 /*******************************************\
  ***establecemos la tabla de puntuaciones***
@@ -190,11 +233,10 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${
-      name.value
-    }, your score is ${attemptsTried} in ${getFormattedTime(
-      Date.now() - tInit
-    )}`;
+    score.textContent = `Hi ${name.value
+      }, your score is ${attemptsTried} in ${getFormattedTime(
+        Date.now() - tInit
+      )}`;
   }
 };
 

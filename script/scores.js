@@ -89,6 +89,9 @@ class Scores {
   }
   showTable() {
     const tableChildren = this._tableSelector.querySelectorAll(".scoreFile");
+    const title = this._tableSelector.parentNode.querySelector("#scoreTitle");
+
+    title.textContent = `Score Table for ${this._cards} cards`;
     // todos sus children son TR. el primero es la cabecera, el resto son las filas
     tableChildren.forEach((row, index) => {
       const rowChildren = row.childNodes;
