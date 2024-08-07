@@ -211,7 +211,7 @@ h2 {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(243, 243, 243, 0.37);
+  background: rgba(33, 57, 97, 0.37);
   border-radius: 10px;
 }
 
@@ -235,3 +235,5 @@ h2 {
 #pause-button {
   background-image: url(img/icons/volume-xmark-svgrepo-com.svg);
 }
+
+background: rgba(243, 243, 243, 0.37);
