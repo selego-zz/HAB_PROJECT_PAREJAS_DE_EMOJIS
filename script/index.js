@@ -105,17 +105,21 @@ function reset() {
       break;
   }
   flipAllCards();
+  icon.back.sort(() => Math.random() - 0.5);
+  icon.back = icon.back.slice(0, totalPairs);
 
   finalIconList = icon.back.concat(icon.back).sort(() => Math.random() - 0.5);
 
-  backs.forEach((back, index) => {
-    back.textContent = finalIconList[index];
-    back.style.cssText = icon.backColor;
-  });
-  fronts.forEach((front) => {
-    front.textContent = icon.front;
-    front.style.cssText = icon.frontColor;
-  });
+  setTimeout(() => {
+    backs.forEach((back, index) => {
+      back.textContent = finalIconList[index];
+      back.style.cssText = icon.backColor;
+    });
+    fronts.forEach((front) => {
+      front.textContent = icon.front;
+      front.style.cssText = icon.frontColor;
+    });
+  }, 500);
 }
 /*******************************************\
  **********establecemos los iconos**********
