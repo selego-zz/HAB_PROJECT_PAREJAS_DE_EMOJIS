@@ -24,9 +24,3 @@ menor sea esa puntuación (como mínimo puede ser 8) mejor.
   https://getemoji.com/
 - Procesamiento de cartas:
   https://codepen.io/bertez/pen/oNoryxg
-
-IDEAS:
-0- estetica
-3- poder escoger "dificultad" nº de cartas
-7- cambiar el you win final
-8- poder comparar imagenes en lugar de iconos
