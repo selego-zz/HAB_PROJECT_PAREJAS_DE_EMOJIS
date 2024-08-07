@@ -112,9 +112,9 @@ function reset(resetTimeout = 500) {
   flipAllCards();
 
   //  icon.back.sort(() => Math.random() - 0.5);
-  icon.back = icon.back.slice(0, totalPairs);
+  let iconBack = icon.back.slice(0, totalPairs);
 
-  finalIconList = icon.back.concat(icon.back).sort(() => Math.random() - 0.5);
+  finalIconList = iconBack.concat(iconBack).sort(() => Math.random() - 0.5);
 
 
   setTimeout(() => {
