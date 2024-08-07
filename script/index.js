@@ -73,7 +73,7 @@ initButton.addEventListener("click", () => {
   reset();
 });
 
-function reset() {
+function reset(resetTimeout = 500) {
   //sobre el tiempo y la puntuación
   tInit = Date.now();
   attemptsTried = 0;
@@ -87,6 +87,9 @@ function reset() {
   currentCardBack = [];
   indexCurrentCard = -1;
   pairsFound = 0;
+
+  if (name.value.length < 1) name.value = "Anonymous"
+  score.textContent = "";
 
   switch (selectTheme.value) {
     case "mountain":
@@ -107,10 +110,12 @@ function reset() {
       break;
   }
   flipAllCards();
-  icon.back.sort(() => Math.random() - 0.5);
+
+  //  icon.back.sort(() => Math.random() - 0.5);
   icon.back = icon.back.slice(0, totalPairs);
 
   finalIconList = icon.back.concat(icon.back).sort(() => Math.random() - 0.5);
+
 
   setTimeout(() => {
     backs.forEach((back, index) => {
@@ -121,7 +126,7 @@ function reset() {
       front.textContent = icon.front;
       front.style.cssText = icon.frontColor;
     });
-  }, 500);
+  }, resetTimeout);
 }
 
 /*******************************************\
@@ -146,7 +151,12 @@ function changeLayout() {
   cards = document.querySelectorAll(".card");//variable, por que pueden cambiar al cambiar la mesa
   fronts = document.querySelectorAll(".front");
   backs = document.querySelectorAll(".back");
-  reset();
+  // tras un click - Revelamos
+  for (const card of cards) {
+    card.addEventListener("click", reveal);
+  }
+
+  reset(0);
 
 }
 /*******************************************\
