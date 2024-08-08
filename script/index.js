@@ -64,7 +64,7 @@ const selectTheme = document.querySelector("#themes");
 const selectLayout = document.querySelector("#layout");
 
 selectLayout.value = "4x4";
-reset();
+reset(0);
 
 /*******************************************\
  **************Inicio de juego**************
@@ -111,8 +111,10 @@ function reset(resetTimeout = 500) {
   }
   flipAllCards();
 
-  //  icon.back.sort(() => Math.random() - 0.5);
-  let iconBack = icon.back.slice(0, totalPairs);
+  //vamos a aleatorizar los iconos, así salen variados en los más pequeños (en el de 36 no, por que no hay de más ^^U)
+  let iconBack = icon.back;
+  iconBack.sort(() => Math.random() - 0.5);
+  iconBack = iconBack.slice(0, totalPairs);
 
   finalIconList = iconBack.concat(iconBack).sort(() => Math.random() - 0.5);
 
@@ -230,11 +232,10 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${
-      name.value
-    }, your score is ${attemptsTried} in ${getFormattedTime(
-      Date.now() - tInit
-    )}`;
+    score.textContent = `Hi ${name.value
+      }, your score is ${attemptsTried} in ${getFormattedTime(
+        Date.now() - tInit
+      )}`;
   }
 };
 

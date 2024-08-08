@@ -4,52 +4,52 @@ import { getFormattedTime } from "./helper.js";
 const defaultScoreTableCard = [
   {
     name: "The Boss",
-    score: 15,
+    score: 1,
     time: 997 * 59 * 21, //en milisegundos
   },
   {
     name: "Maki",
-    score: 20,
+    score: 1.2,
     time: 1010 * 60 * 40, //en milisegundos
   },
   {
     name: "Cerecita",
-    score: 40,
+    score: 1.5,
     time: 1001 * 60 * 58, //en milisegundos
   },
   {
     name: "undefined",
-    score: 60,
+    score: 2,
     time: 999 * 60 * 60, //en milisegundos
   },
   {
     name: "Abuelito",
-    score: 70,
+    score: 3,
     time: 1000 * 50 * 37, //en milisegundos
   },
   {
     name: "tu",
-    score: 80,
+    score: 5,
     time: 1000 * 61 * 65, //en milisegundos
   },
   {
     name: "yo",
-    score: 90,
+    score: 6,
     time: 1000 * 60 * 15, //en milisegundos
   },
   {
     name: "Pepe",
-    score: 100,
+    score: 10,
     time: 1000 * 62 * 30, //en milisegundos
   },
   {
     name: "Pareando",
-    score: 200,
+    score: 20,
     time: 1000 * 60 * 60 * 1, //en milisegundos
   },
   {
     name: "El Mejor",
-    score: 10000,
+    score: 100,
     time: 1000 * 60 * 60 * 20, //en milisegundos
   },
 ];
@@ -70,7 +70,15 @@ class Scores {
       return;
     }
 
-    this._scoreTable = defaultScoreTableCard;
+    this._scoreTable = [];
+
+    //    this._scoreTable = defaultScoreTableCard;
+    defaultScoreTableCard.forEach(defaultScore =>
+      this._scoreTable.push({
+        name: defaultScore.name,
+        score: Math.floor(defaultScore.score * cards),
+        time: defaultScore.time,
+      }));
     this.save();
   }
 

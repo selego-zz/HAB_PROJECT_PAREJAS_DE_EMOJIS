@@ -205,7 +205,13 @@ h2 {
 }
 
 tr {
-  text-align: center;
+  text-align: right;
+}
+td {
+  padding-left: 0.5rem;
+}
+td:nth-child(1) {
+  text-align: left;
 }
 
 /* SCROLL BAR */
