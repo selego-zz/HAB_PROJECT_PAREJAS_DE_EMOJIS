@@ -88,7 +88,7 @@ function reset(resetTimeout = 500) {
   indexCurrentCard = -1;
   pairsFound = 0;
 
-  if (name.value.length < 1) name.value = "Anonymous"
+  if (name.value.length < 1) name.value = "Anonymous";
   score.textContent = "";
 
   switch (selectTheme.value) {
@@ -116,7 +116,6 @@ function reset(resetTimeout = 500) {
 
   finalIconList = iconBack.concat(iconBack).sort(() => Math.random() - 0.5);
 
-
   setTimeout(() => {
     backs.forEach((back, index) => {
       back.textContent = finalIconList[index];
@@ -138,17 +137,17 @@ function changeLayout() {
   const hCards = selectLayout.value[0];
   const vCards = selectLayout.value[2];
 
-  cards.forEach(card => card.remove());
-  totalPairs = hCards * vCards / 2;
+  cards.forEach((card) => card.remove());
+  totalPairs = (hCards * vCards) / 2;
   scoreTable = new Scores(scoreSection, totalPairs * 2);
-  table.style.cssText = `grid-template-columns: repeat(${hCards}, minmax(100px, 1fr));`
+  table.style.cssText = `grid-template-columns: repeat(${hCards}, minmax(100px, 1fr));`;
 
   for (let i = 0; i < totalPairs; i++) {
     insertCard(table);
-    insertCard(table);//2, por que son una pareja
+    insertCard(table); //2, por que son una pareja
   }
 
-  cards = document.querySelectorAll(".card");//variable, por que pueden cambiar al cambiar la mesa
+  cards = document.querySelectorAll(".card"); //variable, por que pueden cambiar al cambiar la mesa
   fronts = document.querySelectorAll(".front");
   backs = document.querySelectorAll(".back");
   // tras un click - Revelamos
@@ -157,12 +156,10 @@ function changeLayout() {
   }
 
   reset(0);
-
 }
 /*******************************************\
  *************cambiamos layout**************
 \*******************************************/
-
 
 /*******************************************\
  **********establecemos los iconos**********
@@ -223,7 +220,7 @@ const reveal = (e) => {
         allClear_sfx();
         scoreTable.add(name.value, attemptsTried, Date.now() - tInit);
         setTimeout(() => {
-          alert("You Win");
+          alert("Well done, you found all the pairs!");
         }, 500);
       }
     } else {
@@ -233,10 +230,11 @@ const reveal = (e) => {
     }
     //haya sido exitoso o no, reiniciamos las cartas a comparar, y la matriz de cards flipped
     currentCardIcon = "";
-    score.textContent = `Hi ${name.value
-      }, your score is ${attemptsTried} in ${getFormattedTime(
-        Date.now() - tInit
-      )}`;
+    score.textContent = `Hi ${
+      name.value
+    }, your score is ${attemptsTried} in ${getFormattedTime(
+      Date.now() - tInit
+    )}`;
   }
 };
 
@@ -280,7 +278,9 @@ function flipCard_sfx() {
 function pairFound_sfx() {
   const sound = new Audio("sfx/correct.ogg");
   sound.volume = 0.2;
-  sound.play();
+  if (pairsFound < totalPairs) {
+    sound.play();
+  }
 }
 
 function miss_sfx() {
@@ -291,7 +291,7 @@ function miss_sfx() {
 
 function allClear_sfx() {
   const sound = new Audio("sfx/allclear.ogg");
-  sound.volume = 0.5;
+  sound.volume = 1;
   audioBackground.pause();
   sound.play();
 }
@@ -312,3 +312,33 @@ pauseButton.addEventListener("click", () => {
 });
 
 console.log(playButton);
+
+/////////////////
+
+/// STAFF CREDITS MODAL
+
+// Get the modal
+const modal = document.getElementById("staff-credits-modal");
+
+// Get the button that opens the modal
+const staffBtn = document.getElementById("staff-credits-button");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+staffBtn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
