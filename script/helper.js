@@ -5,6 +5,11 @@ function getFormattedTime(miliseconds) {
   let auxTime = 0;
   // milisegundos
   time = (+miliseconds % 1000)
+  if (time < 100) {
+    time = "00" + time;
+  } else if (time < 10) {
+    time = "0" + time;
+  }
   // segundos
   if ((auxTime = parseInt(miliseconds / 1000)) === 0) return time;
   time = (auxTime % 60) + "." + time;
