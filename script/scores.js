@@ -1,58 +1,58 @@
-"use strict"
-import { getFormattedTime } from "./helper.js"
+"use strict";
+import { getFormattedTime } from "./helper.js";
 
 const defaultScoreTableCard = [
   {
     name: "The Boss",
     score: 15,
-    time: 997 * 59 * 21,//en milisegundos
+    time: 997 * 59 * 21, //en milisegundos
   },
   {
     name: "Maki",
     score: 20,
-    time: 1010 * 60 * 40,//en milisegundos
+    time: 1010 * 60 * 40, //en milisegundos
   },
   {
     name: "Cerecita",
     score: 40,
-    time: 1001 * 60 * 58,//en milisegundos
+    time: 1001 * 60 * 58, //en milisegundos
   },
   {
     name: "undefined",
     score: 60,
-    time: 999 * 60 * 60,//en milisegundos
+    time: 999 * 60 * 60, //en milisegundos
   },
   {
     name: "Abuelito",
     score: 70,
-    time: 1000 * 50 * 37,//en milisegundos
+    time: 1000 * 50 * 37, //en milisegundos
   },
   {
     name: "tu",
     score: 80,
-    time: 1000 * 61 * 65,//en milisegundos
+    time: 1000 * 61 * 65, //en milisegundos
   },
   {
     name: "yo",
     score: 90,
-    time: 1000 * 60 * 15,//en milisegundos
+    time: 1000 * 60 * 15, //en milisegundos
   },
   {
-    name: "Mejor que el Mejor",
+    name: "Pepe",
     score: 100,
-    time: 1000 * 62 * 30,//en milisegundos
+    time: 1000 * 62 * 30, //en milisegundos
   },
   {
     name: "Pareando",
     score: 200,
-    time: 1000 * 60 * 60 * 1,//en milisegundos
+    time: 1000 * 60 * 60 * 1, //en milisegundos
   },
   {
     name: "El Mejor",
     score: 10000,
-    time: 1000 * 60 * 60 * 20,//en milisegundos
+    time: 1000 * 60 * 60 * 20, //en milisegundos
   },
-]
+];
 
 /////////////////////////////////////////////////
 class Scores {
@@ -68,22 +68,31 @@ class Scores {
       // carga completa
       this.showTable();
       return;
-    };
+    }
 
     this._scoreTable = defaultScoreTableCard;
     this.save();
-  };
+  }
 
   save() {
-    localStorage.setItem(`${this._cards}_Cards`, JSON.stringify(this._scoreTable))
+    localStorage.setItem(
+      `${this._cards}_Cards`,
+      JSON.stringify(this._scoreTable)
+    );
     this.showTable();
-  };
+  }
 
-  add(playerName, playerScore, playerTime) { // solo se puede grabar para el número de cartas para el que está cargada  
+  add(playerName, playerScore, playerTime) {
+    // solo se puede grabar para el número de cartas para el que está cargada
 
     //primero comprobamos que está entre los 10 mejores resultados
-    if (this._scoreTable[this._scoreTable.length - 1].score < playerScore) return;
-    this._scoreTable.push({ name: playerName, score: playerScore, time: playerTime });
+    if (this._scoreTable[this._scoreTable.length - 1].score < playerScore)
+      return;
+    this._scoreTable.push({
+      name: playerName,
+      score: playerScore,
+      time: playerTime,
+    });
     this._scoreTable.sort((a, b) => a.score - b.score).pop();
     this.save();
   }
@@ -98,9 +107,10 @@ class Scores {
       rowChildren[0].textContent = index + 1;
       rowChildren[1].textContent = this._scoreTable[index].name;
       rowChildren[2].textContent = this._scoreTable[index].score;
-      rowChildren[3].textContent = getFormattedTime(this._scoreTable[index].time);
-    }
-    );
+      rowChildren[3].textContent = getFormattedTime(
+        this._scoreTable[index].time
+      );
+    });
   }
 }
 
