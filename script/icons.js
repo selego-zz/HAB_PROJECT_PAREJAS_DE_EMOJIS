@@ -19,6 +19,8 @@ let sea = {
     "🐙",
     "🏄‍♀️",
     "⛵️",
+    "🚣‍♂️",
+    "🛟",
   ],
   backColor: "background: linear-gradient(315deg, #8DB7F5 25%, #8DB7F5 25%);",
 };
@@ -43,6 +45,8 @@ let spring = {
     "🐜",
     "🌾",
     "💐",
+    "🪰",
+    "🪲",
   ],
   backColor: "background: linear-gradient(315deg, #F5ADD7 25%, #F5ADD7 25%)",
 };
@@ -67,6 +71,8 @@ let mountain = {
     "🍄‍🟫",
     "🍂",
     "🍃",
+    "🌱",
+    "🌄",
   ],
   backColor: "background: linear-gradient(315deg, #7ACD93 25%, #7ACD93 25%)",
 };
@@ -91,6 +97,8 @@ let universe = {
     "🌛",
     "⚡️",
     "🌓",
+    "🎆",
+    "🌕",
   ],
   backColor: "background: linear-gradient(315deg, #8486DF 25%, #8486DF 25%)",
 };
@@ -115,6 +123,9 @@ let animals = {
     "🦒",
     "🦘",
     "🐒",
+    "🐄",
+    "🦥",
+    "🦅",
   ],
   backColor:
     "background: linear-gradient(315deg, hsl(45, 52%, 43%) 25%,hsl(45, 52%, 43%) 25%)",
